@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_school_student"
+            model="school.student"
+            string="Student Report"
+            name="school.report_school_student_template"
+            file="school.report_school_student_template"
+            report_type="qweb-pdf"
+        />
+
+        <template id="report_school_student_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Student Report</h2>
+                            <div>
+                                <strong>Name:</strong> <span t-field="o.name"/>
+                            </div>
+                            <div>
+                                <strong>Birth Date:</strong> <span t-field="o.birth_date"/>
+                            </div>
+                            <div>
+                                <strong>Age:</strong> <span t-field="o.age"/>
+                            </div>
+                            <div>
+                                <strong>Final Exam Grade:</strong> <span t-field="o.final_exam_grade"/>
+                            </div>
+                            <h3>Enrolled Subjects</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Subject Name</th>
+                                        <th>Credits</th>
+                                        <th>Teacher</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.subject_ids" t-as="subject">
+                                        <tr>
+                                            <td><span t-field="subject.name"/></td>
+                                            <td><span t-field="subject.credits_id"/></td>
+                                            <td><span t-field="subject.teacher_id.name"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

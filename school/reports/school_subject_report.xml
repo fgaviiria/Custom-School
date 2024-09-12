@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_school_subject"
+            model="school.subject"
+            string="Subject Report"
+            name="school.report_school_subject_template"
+            file="school.report_school_subject_template"
+            report_type="qweb-pdf"
+        />
+
+        <template id="report_school_subject_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Subject Report</h2>
+                            <div>
+                                <strong>Name:</strong> <span t-field="o.name"/>
+                            </div>
+                            <div>
+                                <strong>Credits:</strong> <span t-field="o.credits_id"/>
+                            </div>
+                            <div>
+                                <strong>Max Students:</strong> <span t-field="o.max_students"/>
+                            </div>
+                            <div>
+                                <strong>Teacher:</strong> <span t-field="o.teacher_id.name"/>
+                            </div>
+                            <h3>Enrolled Students</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.students_ids" t-as="student">
+                                        <tr>
+                                            <td><span t-field="student.name"/></td>
+                                            <td><span t-field="student.age"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

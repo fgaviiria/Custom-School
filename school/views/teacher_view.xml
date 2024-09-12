@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="teacher_form_view" model="ir.ui.view">
+        <field name="name">teacher.form.view</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form string="Insert Teacher">
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name="name"/>
+                              <field name="profile"/>
+                          </group>
+                      </group>
+                      <notebook>
+                            <page string="Subjects">
+                                <field name="subject_ids" widget="one2many_list" options="{'no_create': True}">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="credits_id"/>
+                                        <field name="max_students"/>
+                                        <field name="active"/>
+                                    </tree>
+                                </field>
+                            </page>
+                      </notebook>
+                  </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="teacher_tree_view" model="ir.ui.view">
+        <field name="name">teacher.tree.view</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <tree string="Student">
+                <field name="name"/>
+                <field name="profile"/>
+                <field name="subject_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
